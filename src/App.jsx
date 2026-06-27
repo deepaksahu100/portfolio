@@ -352,24 +352,34 @@ function App() {
           </div>
 
           <div className="hero-visual">
-            <Suspense
-              fallback={
-                <div className="canvas-fallback">
-                  <div className="skeleton" />
-                  <div className="skeleton" />
-                  <div className="skeleton skeleton--wide" />
+            <div className="hero-visual__canvas">
+              <Suspense
+                fallback={
+                  <div className="canvas-fallback">
+                    <div className="skeleton" />
+                    <div className="skeleton" />
+                    <div className="skeleton skeleton--wide" />
+                  </div>
+                }
+              >
+                <WorkspaceCanvas />
+              </Suspense>
+            </div>
+
+            <div className="hero-focus-card glass-panel">
+              <div className="hero-focus-card__header">
+                <div>
+                  <span className="hero-focus-card__eyebrow">Production engineering focus</span>
+                  <strong>React, Node, MongoDB, MySQL, React Native</strong>
                 </div>
-              }
-            >
-              <WorkspaceCanvas />
-            </Suspense>
-            <div className="visual-caption">
-              <div>
-                <span>Production engineering focus</span>
-                <strong>React, Node, MongoDB, MySQL, React Native</strong>
+                <div className="hero-focus-card__tags">
+                  <span>Real work</span>
+                  <span>Live apps</span>
+                  <span>Mobile</span>
+                </div>
               </div>
-              <div className="visual-caption__image">
-                <img src={heroFocusImage} alt="Production engineering focus artwork" loading="lazy" />
+              <div className="hero-focus-card__image">
+                <img src={heroFocusImage} alt="Production engineering focus artwork" loading="lazy" decoding="async" />
               </div>
             </div>
           </div>

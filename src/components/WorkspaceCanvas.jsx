@@ -92,6 +92,51 @@ function OrbitRing({ position, color, scale = 1 }) {
   );
 }
 
+function FloatingOrb({ position, color, scale = 1 }) {
+  const orbRef = React.useRef();
+  useFrame(({ clock }) => {
+    if (!orbRef.current) return;
+    orbRef.current.position.y = position[1] + Math.sin(clock.getElapsedTime() * 1.4) * 0.12;
+    orbRef.current.rotation.x += 0.01;
+    orbRef.current.rotation.y += 0.015;
+  });
+
+  return (
+    <Float speed={1.8} rotationIntensity={1.2} floatIntensity={1}>
+      <mesh ref={orbRef} position={position} scale={scale}>
+        <icosahedronGeometry args={[0.25, 0]} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.8} roughness={0.15} metalness={0.85} />
+      </mesh>
+    </Float>
+  );
+}
+
+function FloatingCard({ position, color, label }) {
+  const cardRef = React.useRef();
+  useFrame(({ clock }) => {
+    if (!cardRef.current) return;
+    cardRef.current.rotation.z = Math.sin(clock.getElapsedTime() * 0.7) * 0.03;
+  });
+
+  return (
+    <Float speed={1.2} rotationIntensity={0.25} floatIntensity={0.5}>
+      <group ref={cardRef} position={position}>
+        <mesh>
+          <boxGeometry args={[1.1, 0.72, 0.06]} />
+          <meshStandardMaterial color={color} metalness={0.35} roughness={0.25} />
+        </mesh>
+        <mesh position={[0, 0, 0.04]}>
+          <boxGeometry args={[0.95, 0.56, 0.04]} />
+          <meshStandardMaterial color="#020617" roughness={0.95} />
+        </mesh>
+        <Text position={[0, -0.07, 0.08]} color="white" fontSize={0.12} anchorX="center" anchorY="middle">
+          {label}
+        </Text>
+      </group>
+    </Float>
+  );
+}
+
 function Workspace() {
   const logoPositions = useMemo(
     () => [
@@ -111,6 +156,10 @@ function Workspace() {
       <pointLight position={[2, 2, 4]} intensity={1.2} color="#3b82f6" />
       <OrbitRing position={[-1.5, 0.9, -1.4]} color="#a855f7" scale={1.2} />
       <OrbitRing position={[1.8, -0.1, -1.1]} color="#3b82f6" scale={1.1} />
+      <FloatingOrb position={[-0.6, 1.35, -0.3]} color="#38bdf8" />
+      <FloatingOrb position={[1.4, 1.25, 0.2]} color="#22c55e" scale={1.2} />
+      <FloatingCard position={[-2.05, -1.25, -0.3]} color="#4c1d95" label="APIs" />
+      <FloatingCard position={[2.0, -1.2, -0.2]} color="#1d4ed8" label="Mobile" />
       <group position={[0, -0.05, 0]}>
         <Laptop position={[0, -0.3, 0]} />
         <Phone position={[-2.3, -0.35, 0.5]} color="#7c3aed" />
