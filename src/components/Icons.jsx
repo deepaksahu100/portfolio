@@ -3,7 +3,7 @@ import { SiExpress, SiJavascript, SiMongodb, SiReact, SiNodedotjs, SiMysql, SiSo
 import { FaCloud, FaGithub, FaLinkedin, FaPaperPlane, FaRegFilePdf, FaRegMessage } from 'react-icons/fa6';
 import { TbBrandReactNative } from 'react-icons/tb';
 
-export const iconMap = {
+export const iconMap = { 
   react: SiReact,
   node: SiNodedotjs,
   mongo: SiMongodb,
