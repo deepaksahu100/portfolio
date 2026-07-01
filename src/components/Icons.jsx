@@ -7,7 +7,7 @@ export const iconMap = {
   react: SiReact,
   node: SiNodedotjs,
   mongo: SiMongodb,
-  js: SiJavascript,
+  js: SiJavascript,  
   mysql: SiMysql,
   socket: SiSocketdotio,
   express: SiExpress,
